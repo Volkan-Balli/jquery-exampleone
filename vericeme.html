@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form Örneği</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    </head>
+</head>
+
+<body class="bg-gray-100">
+    <h1 class="text-2xl text-center font-bold my-6">Dinamik Kullanıcı Tablosu</h1>
+    <div class="overflow-x-auto">
+        <table class="table-auto w-3/4 mx-auto border-collapse border border-gray-400 shadow-lg bg-white">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border border-gray-400 px-4 py-2">ID</th>
+                    <th class="border border-gray-400 px-4 py-2">Ad</th>
+                    <th class="border border-gray-400 px-4 py-2">Email</th>
+                    <th class="border border-gray-400 px-4 py-2">Adres</th>
+                </tr>
+            </thead>
+            <tbody id="userTableBody">
+
+            </tbody>
+        </table>
+        <script>
+            $(document).ready(function () {
+
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/users',
+                    method: 'GET',
+                    success: function (response) {
+
+                        response.forEach(user => {
+                            $('#userTableBody').append(`
+                            <tr>
+                                <td class="border border-gray-400 px-4 py-2">${user.id}</td>
+                                <td class="border border-gray-400 px-4 py-2">${user.name}</td>
+                                <td class="border border-gray-400 px-4 py-2">${user.email}</td>
+                                <td class="border border-gray-400 px-4 py-2">${user.address.street}, ${user.address.city}</td>
+                            </tr>
+                        `);
+                        });
+                    }
+                });
+
+            })
+        </script>
+</body>
+
+</html>

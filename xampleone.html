@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <button id="load-data" type="button">Veriyi Getir</button>
+    <div id="result"></div>
+    <script>
+        $(document).ready(function () {
+            $("#load-data").click(function () {
+                $.get('https://jsonplaceholder.typicode.com/posts', function (data) {
+                    const firstPost = data[0];
+                    $("#result").html(
+                        `<h3>${firstPost.title}</h3>
+                        <p>${firstPost.body}</p>`
+                    );
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

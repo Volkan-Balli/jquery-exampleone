@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <input type="text" id="search" placeholder="Arama yap">
+    <div id="result"></div>
+    <script>
+        $(document).ready(function () {
+            $("#search").keyup(function () {
+                var searchTerm = $(this).val().toLowerCase();
+                $("#result").html("");
+                $.getJSON('https://jsonplaceholder.typicode.com/users', function (data) {
+                    $.each(data, function (index, item) {
+                        if (item.name.toLowerCase().indexOf(searchTerm) > -1) {
+                            $("#result").append(
+                                `<p><b>ID:</b> ${item.id}<br><b>Name:</b> ${item.name}<br><b>Email:</b> ${item.email}</p>`
+                            );
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
